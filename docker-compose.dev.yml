@@ -1,0 +1,56 @@
+##############################################################################################
+# This file is not asked but it was helpful to setup Laravel/nginx configuration locally
+# Works only if infrastructure/nginx/conf.d/app.conf sets `fastcgi_pass` to `quickstart:9000;`
+# Then run `docker exec quickstart php artisan migrate` to setup the database
+##############################################################################################
+version: '3.7'
+
+services:
+
+  quickstart:
+    container_name: quickstart
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app-stage
+    environment:
+      APP_ENV: local
+      DB_CONNECTION: mysql
+      DB_HOST: database
+      DB_DATABASE: main
+      DB_USERNAME: user
+      DB_PASSWORD: password
+    working_dir: /var/www
+    networks:
+      - bark
+
+  database:
+    image: mysql:8.0
+    container_name: database
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - bark
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: nginx-stage
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./infrastructure/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - bark
+
+networks:
+  bark:

@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app-stage
+    environment:
+      APP_ENV: testing
+    volumes:
+      - ./:/var/www
+    command: |
+      bash -c "touch database/database.sqlite &&
+      php artisan migrate --database=sqlite &&
+      vendor/bin/phpunit"
