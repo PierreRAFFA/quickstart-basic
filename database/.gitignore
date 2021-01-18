@@ -1,1 +1,2 @@
+# Remove sqlite from .gitignore to have a usable database once in AWS
 *.sqlite

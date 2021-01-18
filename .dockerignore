@@ -7,4 +7,5 @@ public/css/
 yarn-error.log
 
 # Ops
-ops/
+ops/cicd
+ops/infrastructure

@@ -41,6 +41,7 @@ USER www-data
 ####################################
 FROM nginx:1.17-alpine AS nginx-stage
 
-# Nginx only needs to have the files in 'public/'. The other php files to only exist in the php image
-COPY infrastructure/nginx/conf.d/app.conf /etc/nginx/conf.d/default.conf
+# Nginx only needs to have the files in 'public/'.
+# The other php files to only exist in the php image
+COPY ops/nginx/conf.d/app.conf /etc/nginx/conf.d/default.conf
 COPY public /var/www/public
