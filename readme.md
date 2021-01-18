@@ -19,6 +19,9 @@ Please set AWS Access token before
 ./ops/scripts/cd.sh
 ```
 
+## Other
+Dashboard created to track the number of page hits
+
 ## Improvements
  - Set limited permissions to `deployer` AWS user
  - Create a RDS in AWS instead of an embedded sqlite in the app image. 
