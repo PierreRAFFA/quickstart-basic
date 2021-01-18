@@ -1,4 +1,4 @@
-# Laravel Quickstart - Basic
+# Laravel Quickstart - AWS - Fargate
 
 ## Technical Overview
  - Terraform >= 0.12

@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
     tty: true
     volumes:
-      - ./infrastructure/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./ops/nginx/conf.d/:/etc/nginx/conf.d/
     ports:
       - "80:80"
       - "443:443"
